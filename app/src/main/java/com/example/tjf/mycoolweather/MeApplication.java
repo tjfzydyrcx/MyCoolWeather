@@ -1,18 +1,18 @@
 package com.example.tjf.mycoolweather;
 
-import android.app.Application;
+import android.content.Context;
 
 import org.litepal.LitePal;
+import org.litepal.LitePalApplication;
 
 
 /**
  * Created by Administrator on 2017-12-23 0023.
  */
-public class MeApplication extends Application {
+public class MeApplication extends LitePalApplication {
+
     @Override
     public void onCreate() {
         super.onCreate();
-        //litePal 的初始化
-        LitePal.initialize(this);
     }
 }
