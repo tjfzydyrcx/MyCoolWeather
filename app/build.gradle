@@ -20,7 +20,29 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.3.0'
+    //gosn 解析
+    compile 'com.google.code.gson:gson:2.2.4'
+
+    /**
+     * 注解框架
+     *  第一步确定你的dependencies中的gralde也为2.2.0+就OK啦~
+     * 保证你的glarde 的wrapper文件中的第二个文件里的   distributionUrl=https\://services.gradle.org/distributions/gradle-2.14.1-all.zip 是大于等于 2.14.1
+     */
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    //网络框架
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.squareup.okio:okio:1.13.0'
+
+    /**
+     *  使用对象 - 关系映射（ORM）模式。
+     几乎为零配置（只有一个配置文件，属性很少）。
+     自动维护所有表（例如创建，修改或删除表）。
+     多数据库支持。
+     */
+    compile 'org.litepal.android:core:1.6.1'
+
 }
