@@ -1,6 +1,7 @@
 package com.example.tjf.mycoolweather.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tjf.mycoolweather.MainActivity;
 import com.example.tjf.mycoolweather.R;
+import com.example.tjf.mycoolweather.WeatherActivity;
 import com.example.tjf.mycoolweather.db.City;
 import com.example.tjf.mycoolweather.db.County;
 import com.example.tjf.mycoolweather.db.Province;
@@ -82,16 +85,16 @@ public class Choose_AreaFragment extends Fragment {
         return view;
     }
 
-  /*  @OnItemClick(R.id.list_view)
-    void OnItemClick(int position) {
-        if (currentLevel == LEVEL_PROVINCE) {
-            selecteprovince = provinceList.get(position);
-            queryCities();
-        } else if (currentLevel == LEVEL_CITY) {
-            selectecity = cityList.get(position);
-            queryCounties();
-        }
-    }*/
+    /*  @OnItemClick(R.id.list_view)
+      void OnItemClick(int position) {
+          if (currentLevel == LEVEL_PROVINCE) {
+              selecteprovince = provinceList.get(position);
+              queryCities();
+          } else if (currentLevel == LEVEL_CITY) {
+              selectecity = cityList.get(position);
+              queryCounties();
+          }
+      }*/
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -106,7 +109,18 @@ public class Choose_AreaFragment extends Fragment {
                     selectecity = cityList.get(position);
                     queryCounties();
                 } else if (currentLevel == LEVEL_COUNTY) {
-                    selectecounty = countyList.get(position);
+                    String weatherId = countyList.get(position).getWeatherId();
+                    if (getActivity() instanceof MainActivity) {
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id", weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    } else if (getActivity() instanceof WeatherActivity) {
+                        WeatherActivity activity = (WeatherActivity) getActivity();
+                        activity.drawerLayout.closeDrawers();
+                        activity.swipeRefresh.setRefreshing(true);
+                        activity.requestWeather(weatherId);
+                    }
                 }
             }
         });
@@ -199,6 +213,7 @@ public class Choose_AreaFragment extends Fragment {
     /**
      * 根据传入的地址和类型从服务器上查询省市县数据。
      */
+
     private void queryFromServer(String address, final String type) {
         showProgressDialog();
         HttpUtil.sendOkHttpRequest(address, new Callback() {
