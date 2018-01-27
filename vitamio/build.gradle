@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+}
+
+android {
+
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            jniLibs.srcDirs = ['libs']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+        }
+
+    }
+
+}

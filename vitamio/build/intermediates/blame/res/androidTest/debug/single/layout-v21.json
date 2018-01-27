@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action.xml",
+        "source": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\26.0.0-alpha1\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\26.0.0-alpha1\\res\\layout-v21\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\26.0.0-alpha1\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\26.0.0-alpha1\\res\\layout-v21\\notification_action_tombstone.xml"
+    }
+]
