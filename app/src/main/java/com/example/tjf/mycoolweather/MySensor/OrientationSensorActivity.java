@@ -27,7 +27,7 @@ public class OrientationSensorActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_sensor);
+//        setContentView(R.layout.layout_sensor);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         // 初始化加速度传感器
         accelerometer = mSensorManager
