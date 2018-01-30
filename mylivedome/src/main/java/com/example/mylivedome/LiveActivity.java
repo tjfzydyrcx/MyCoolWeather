@@ -24,7 +24,6 @@ import java.util.Calendar;
 
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.Vitamio;
-import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
 /**

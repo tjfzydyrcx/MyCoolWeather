@@ -1,1 +1,1 @@
-include ':app', ':myasytaskdownload', ':myfestival_sms', ':mywish_share', ':myaudiodome', ':mylivedome', ':vitamio'
+include ':app', ':myasytaskdownload', ':myfestival_sms', ':myaudiodome', ':mylivedome', ':vitamio', ':mygobang'
