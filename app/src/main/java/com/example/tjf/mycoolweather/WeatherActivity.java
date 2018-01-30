@@ -3,7 +3,6 @@ package com.example.tjf.mycoolweather;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -11,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.tjf.mycoolweather.gson.Forecast;
-import com.example.tjf.mycoolweather.gson.Weather;
+import com.example.tjf.mycoolweather.Mygson.Forecast;
+import com.example.tjf.mycoolweather.Mygson.Weather;
 import com.example.tjf.mycoolweather.service.AutoUpdateService;
 import com.example.tjf.mycoolweather.util.HttpUtil;
 import com.example.tjf.mycoolweather.util.ToastUtil;
@@ -95,11 +93,7 @@ public class WeatherActivity extends BaseActivity {
         } else {
             mWeatherId = getIntent().getStringExtra("weather_id");
             weatherLayout.setVisibility(View.VISIBLE);
-            if (isNetChanges == true) {
-                requestWeather(mWeatherId);
-            } else {
-                ToastUtil.showLong(WeatherActivity.this, "无网络连接");
-            }
+            requestWeather(mWeatherId);
         }
         /**
          * 下拉刷新
@@ -133,12 +127,7 @@ public class WeatherActivity extends BaseActivity {
             Log.e("HH1", bingPic);
             Glide.with(this).load(bingPic).into(bingPicImg);
         } else {
-            if (isNetChanges == true) {
-                ToastUtil.showLong(this, "网络连接");
                 loadBingPic();
-            } else {
-                ToastUtil.showLong(this, "无网络连接");
-            }
         }
     }
 
