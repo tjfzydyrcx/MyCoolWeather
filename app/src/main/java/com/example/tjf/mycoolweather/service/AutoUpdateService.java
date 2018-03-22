@@ -11,7 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.example.tjf.mycoolweather.gson.Weather;
+import com.example.tjf.mycoolweather.Mygson.Weather;
 import com.example.tjf.mycoolweather.util.HttpUtil;
 import com.example.tjf.mycoolweather.util.Utility;
 
