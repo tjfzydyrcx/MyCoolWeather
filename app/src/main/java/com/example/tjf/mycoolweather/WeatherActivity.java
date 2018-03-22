@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -72,6 +74,7 @@ public class WeatherActivity extends BaseActivity {
     public ImageView bingPicImg;
     public String mWeatherId;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,14 +123,52 @@ public class WeatherActivity extends BaseActivity {
             }
         });
         /**
+         * 侧滑菜单 滑动效果
+         */
+        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                View mContent = drawerLayout.getChildAt(0);
+                View mMenu = drawerView;
+                float scale = 1 - slideOffset;
+                float rightScale = 0.8f + scale * 0.2f;
+                if (drawerView.getTag().equals("LEFT")) {
+                    float leftScale = 1 - 0.3f * scale;
+                    mMenu.setScaleX(leftScale);
+                    mMenu.setScaleY(leftScale);
+                    mMenu.setAlpha(0.6f + 0.4f * (1 - scale));
+                    mContent.setTranslationX(mMenu.getMeasuredWidth() * (1 - scale));
+                    mContent.setPivotX(0);
+                    mContent.setPivotY(mContent.getMeasuredHeight() / 2);
+                    mContent.invalidate();
+                    mContent.setScaleX(rightScale);
+                    mContent.setScaleY(rightScale);
+                }
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
+        /**
          * 获取保存的BI图片网址
          */
         String bingPic = prefs.getString("bing_pic", null);
         if (bingPic != null) {
-            Log.e("HH1", bingPic);
             Glide.with(this).load(bingPic).into(bingPicImg);
         } else {
-                loadBingPic();
+            loadBingPic();
         }
     }
 
