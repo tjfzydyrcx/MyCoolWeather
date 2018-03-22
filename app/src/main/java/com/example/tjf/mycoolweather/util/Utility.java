@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.example.tjf.mycoolweather.db.City;
 import com.example.tjf.mycoolweather.db.County;
 import com.example.tjf.mycoolweather.db.Province;
-import com.example.tjf.mycoolweather.gson.Weather;
+import com.example.tjf.mycoolweather.Mygson.Weather;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
