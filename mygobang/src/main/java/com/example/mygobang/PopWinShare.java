@@ -23,9 +23,9 @@ public class PopWinShare extends PopupWindow {
         //窗口布局
         mainView = LayoutInflater.from(paramActivity).inflate(R.layout.popwin_share, null);
         //分享布局
-        layoutShare = mainView.findViewById(R.id.layout_share);
+        layoutShare = (LinearLayout) mainView.findViewById(R.id.layout_start);
         //复制布局
-        layoutCopy = mainView.findViewById(R.id.layout_copy);
+        layoutCopy = (LinearLayout) mainView.findViewById(R.id.layout_copy);
         //设置每个子布局的事件监听器
         if (paramOnClickListener != null) {
             layoutShare.setOnClickListener(paramOnClickListener);

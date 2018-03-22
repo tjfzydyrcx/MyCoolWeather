@@ -1,0 +1,39 @@
+<!--
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Carson_Ho</title>
+
+    &lt;!&ndash;  // JS代码&ndash;&gt;
+    &lt;!&ndash; Android需要调用的方法&ndash;&gt;
+    <script>
+   function callJS(){
+      alert("Android调用了JS的callJS方法");
+
+   }
+
+    </script>
+</head>
+</html>
+
+//点击按钮则调用callAndroid函数
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Carson</title>
+    <script>
+         function callAndroid(){
+            test.hello("js调用了android中的hello方法");
+         }
+    </script>
+</head>
+<body>
+<button type="button" id="button1" onclick="callAndroid()">点击调用Android 代码</button>
+
+</body>
+</html>

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -62,7 +63,6 @@ public class SendMsgActivity extends AppCompatActivity {
     private SmsBiz mSms;
     private int mMsgSendCount = 0;
     private int mTotalCount = 0;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 

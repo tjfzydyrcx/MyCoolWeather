@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 
 import butterknife.ButterKnife;
-//再次提交
-//拉去成功
-//往回拉去
+/**
+ * Created by Administrator on 2018-01-26 0026.
+ */
 public class MainActivity extends BaseActivity {
 
     @Override

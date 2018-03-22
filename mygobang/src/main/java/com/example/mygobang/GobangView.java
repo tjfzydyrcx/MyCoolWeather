@@ -260,8 +260,9 @@ public class GobangView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 //
-        if (mIsGameOver)
+        if (mIsGameOver) {
             return false;
+        }
         int action = event.getAction();
         if (action == MotionEvent.ACTION_UP) {
             int x = (int) event.getX();

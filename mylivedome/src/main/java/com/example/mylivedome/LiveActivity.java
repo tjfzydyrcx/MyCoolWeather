@@ -66,6 +66,8 @@ public class LiveActivity extends AppCompatActivity {
         initView();
         initEvent();
         initPlayer();
+
+        
     }
 
     @Override
