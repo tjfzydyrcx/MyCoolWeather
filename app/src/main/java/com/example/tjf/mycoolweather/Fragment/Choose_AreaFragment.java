@@ -5,17 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tjf.mycoolweather.Adapter.CityAdapter;
 import com.example.tjf.mycoolweather.MainActivity;
 import com.example.tjf.mycoolweather.R;
 import com.example.tjf.mycoolweather.WeatherActivity;
@@ -33,9 +32,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnItemClick;
-import butterknife.OnItemSelected;
 import butterknife.Unbinder;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -60,7 +56,7 @@ public class Choose_AreaFragment extends Fragment {
     @BindView(R.id.list_view)
     ListView mlistView;
     List<String> datalist = new ArrayList<>();
-    ArrayAdapter<String> mArrayAdapter;
+    CityAdapter mCityAdapter;
     //省市县集合数据
     List<Province> provinceList;
     List<City> cityList;
@@ -69,7 +65,7 @@ public class Choose_AreaFragment extends Fragment {
     //选中的省市县
     Province selecteprovince;
     City selectecity;
-    County selectecounty;
+    //   County selectecounty;
 
     //选中的级别
     private int currentLevel;
@@ -80,8 +76,8 @@ public class Choose_AreaFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.choose_area, container, false);
         unbinder = ButterKnife.bind(this, view);
-        mArrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, datalist);
-        mlistView.setAdapter(mArrayAdapter);
+        mCityAdapter = new CityAdapter(getContext(), datalist);
+        mlistView.setAdapter(mCityAdapter);
         return view;
     }
 
@@ -150,7 +146,7 @@ public class Choose_AreaFragment extends Fragment {
             for (Province p : provinceList) {
                 datalist.add(p.getProviceName());
             }
-            mArrayAdapter.notifyDataSetChanged();
+            mCityAdapter.notifyDataSetChanged();
             mlistView.setSelection(0);
             currentLevel = LEVEL_PROVINCE;
         } else {
@@ -175,7 +171,7 @@ public class Choose_AreaFragment extends Fragment {
                 datalist.add(c.getCityName());
             }
 
-            mArrayAdapter.notifyDataSetChanged();
+            mCityAdapter.notifyDataSetChanged();
             mlistView.setSelection(0);
             currentLevel = LEVEL_CITY;
         } else {
@@ -198,7 +194,7 @@ public class Choose_AreaFragment extends Fragment {
             for (County c : countyList) {
                 datalist.add(c.getCountyName());
             }
-            mArrayAdapter.notifyDataSetChanged();
+            mCityAdapter.notifyDataSetChanged();
             mlistView.setSelection(0);
             currentLevel = LEVEL_COUNTY;
         } else {
