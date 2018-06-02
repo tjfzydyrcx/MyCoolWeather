@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.tjf.mycoolweather.Mygson.Weather;
+import com.example.tjf.mycoolweather.db.Picphoto;
 import com.example.tjf.mycoolweather.util.HttpUtil;
 import com.example.tjf.mycoolweather.util.Utility;
 
@@ -85,12 +86,21 @@ public class AutoUpdateService extends Service {
             public void onFailure(Call call, IOException e) {
 
             }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String bingPic = response.body().string();
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(AutoUpdateService.this).edit();
+               /* SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(AutoUpdateService.this).edit();
                 editor.putString("bing_pic", bingPic);
-                editor.apply();
+                editor.apply();*/
+
+                Picphoto picphoto = new Picphoto();
+                try {
+                    picphoto.setPicName(bingPic);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                picphoto.save();
                 Log.e("HH2", bingPic);
             }
         });

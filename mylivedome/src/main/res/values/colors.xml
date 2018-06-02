@@ -7,5 +7,5 @@
 
     <color name="rl_loading_bg">#de262a3b</color>
     <color name="play_panel_bg">#dd000000</color>
-
+    <color name="yellow">#F8AA2B</color>
 </resources>

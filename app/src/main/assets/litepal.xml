@@ -6,6 +6,8 @@
         <mapping class="com.example.tjf.mycoolweather.db.Province" />
         <mapping class="com.example.tjf.mycoolweather.db.City" />
         <mapping class="com.example.tjf.mycoolweather.db.County" />
+        <mapping class="com.example.tjf.mycoolweather.db.Picphoto" />
+
     </list>
 
 </litepal>

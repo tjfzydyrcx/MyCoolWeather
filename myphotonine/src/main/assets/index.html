@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WebView</title>
+<style>
+
+body{
+	background:#FF6
+}
+.btn{
+	line-height:40px;
+	margin:10px;
+	background:#CCC
+}
+
+</style>
+</head>
+
+<body>
+<h2>
+webview
+</h2>
+<div><span> 请输入要传递的值：    </span> <input type="text" id="input" /> </div>
+<div id="btn"> <span class="btn"> 点我   </span> </div>
+
+<script type="text/javascript">
+  var btnEle=document.getElementById("btn");
+    var inputEle=document.getElementById("input");
+
+  btnEle.addEventListener("click",function(){
+	  var str=inputEle.value;
+	  //alert(str);
+	  if(window.android){
+		  android.show(str);
+	  }else{
+		 alert("方法不存在"); 
+	  }
+	  });
+	    var remote=function(str){
+		  inputEle.value=str;
+	  }
+</script>
+</body>
+</html>

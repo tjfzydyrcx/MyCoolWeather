@@ -17,6 +17,20 @@ import okhttp3.Response;
  * Created by Administrator on 2017-12-23 0023.
  */
 public class HttpUtil {
+    public static void main(String args[]) {
+        int num = 10;
+        // int x= (int) (num+2);
+
+        num += 2L;
+        boolean flag = 10 % 2 == 1 && 10 / 3 == 0 && 1 / 0 == 0;
+        int i = 1;
+        int j = i++;
+        if ((i == (++j)) && (i++) == j) {
+            i += j;
+        }
+        System.out.println("i=" + i);
+
+    }
 
   /*  public Handler mHandle = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         @Override
@@ -30,7 +44,9 @@ public class HttpUtil {
         return HttpUtilHolder.mhttputils;
     }
 
-    *//**
+    */
+
+    /**
      * 静态内部类与外部类的实例没有绑定关系，而且只有被调用时才会
      * 加载，从而实现了延迟加载
      *//*

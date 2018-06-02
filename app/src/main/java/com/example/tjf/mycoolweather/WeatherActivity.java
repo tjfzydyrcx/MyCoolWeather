@@ -2,6 +2,8 @@ package com.example.tjf.mycoolweather;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,12 +28,18 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.tjf.mycoolweather.Mygson.Forecast;
 import com.example.tjf.mycoolweather.Mygson.Weather;
+import com.example.tjf.mycoolweather.db.Picphoto;
 import com.example.tjf.mycoolweather.service.AutoUpdateService;
 import com.example.tjf.mycoolweather.util.HttpUtil;
+import com.example.tjf.mycoolweather.util.LogUtils;
 import com.example.tjf.mycoolweather.util.ToastUtil;
 import com.example.tjf.mycoolweather.util.Utility;
 
+import org.litepal.crud.DataSupport;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -106,6 +115,9 @@ public class WeatherActivity extends BaseActivity {
             public void onRefresh() {
                 if (isNetChanges == true) {
                     requestWeather(mWeatherId);
+                    MyLocationManager manager = new MyLocationManager(WeatherActivity.this);
+                    manager.getaddress();
+
                 } else {
                     swipeRefresh.setRefreshing(false);
                     ToastUtil.showLong(WeatherActivity.this, "无网络连接");
@@ -164,12 +176,25 @@ public class WeatherActivity extends BaseActivity {
         /**
          * 获取保存的BI图片网址
          */
-        String bingPic = prefs.getString("bing_pic", null);
+       /* String bingPic = prefs.getString("bing_pic", null);
         if (bingPic != null) {
             Glide.with(this).load(bingPic).into(bingPicImg);
         } else {
+        loadBingPic();
+        }*/
+
+        Picphoto ps = DataSupport.findFirst(Picphoto.class);
+        if (ps != null) {
+            if (!TextUtils.isEmpty(ps.getPicName())) {
+                Glide.with(this).load(ps.getPicName()).into(bingPicImg);
+            } else {
+                loadBingPic();
+            }
+        } else {
             loadBingPic();
         }
+
+
     }
 
     /**
@@ -259,6 +284,12 @@ public class WeatherActivity extends BaseActivity {
         });
     }
 
+    private byte[] img(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+    }
+
     /**
      * 加载必应每日一图
      */
@@ -267,15 +298,20 @@ public class WeatherActivity extends BaseActivity {
         HttpUtil.sendOkHttpRequest(requestBingPic, new Callback() {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                final String bingPic = response.body().string();
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
-                editor.putString("bing_pic", bingPic);
-                editor.apply();
-                Log.e("HH", bingPic);
+                String bingPic = response.body().string();
+                Picphoto picphoto = new Picphoto();
+                try {
+                    picphoto.setPicName(bingPic);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                picphoto.save();
+                final Picphoto picphotos = DataSupport.findFirst(Picphoto.class);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Glide.with(WeatherActivity.this).load(bingPic).into(bingPicImg);
+                        LogUtils.e("hhhs==" + "数据库图片");
+                        Glide.with(WeatherActivity.this).load(picphotos.getPicName()).into(bingPicImg);
                     }
                 });
             }
@@ -288,4 +324,15 @@ public class WeatherActivity extends BaseActivity {
 
     }
 
+    public static byte[] readInputStream(InputStream inputStream) throws Exception {
+        byte[] buffer = new byte[1024];
+        int len = -1;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        while ((len = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, len);
+        }
+        outputStream.close();
+        inputStream.close();
+        return outputStream.toByteArray();
+    }
 }

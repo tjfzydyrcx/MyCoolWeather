@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    allprojects {
+        repositories {
+            maven { url "https://jitpack.io" }
+        }
+    }
 }
 
 dependencies {
@@ -24,4 +29,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile project(':vitamio')
+    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
+    compile 'com.github.HotBitmapGG:NineImageView:V1.0'
+    compile 'com.hyman:flowlayout-lib:1.1.2'
+    compile 'top.zibin:Luban:1.1.3'
 }

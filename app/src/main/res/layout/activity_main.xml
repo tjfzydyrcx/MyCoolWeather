@@ -4,10 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.tjf.mycoolweather.MainActivity">
+        <fragment
+            android:id="@+id/choose_area_fragment"
+            android:name="com.example.tjf.mycoolweather.Fragment.Choose_AreaFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <fragment
-        android:id="@+id/choose_area_fragment"
-        android:name="com.example.tjf.mycoolweather.Fragment.Choose_AreaFragment"
+    <com.example.tjf.mycoolweather.TouchImageView
+        android:visibility="gone"
+        android:id="@+id/id_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:src="@mipmap/skin_main_bg" />
 </FrameLayout>

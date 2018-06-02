@@ -35,6 +35,7 @@ public class InitActivity extends Activity {
   private ProgressDialog mPD;
   private UIHandler uiHandler;
 
+  @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

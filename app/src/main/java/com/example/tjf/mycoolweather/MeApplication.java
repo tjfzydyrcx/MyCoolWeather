@@ -14,5 +14,6 @@ public class MeApplication extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
     }
 }

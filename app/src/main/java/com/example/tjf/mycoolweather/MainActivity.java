@@ -4,6 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
+
+import com.example.tjf.mycoolweather.HttpManager.HttpManagers;
+import com.example.tjf.mycoolweather.HttpManager.IResquestManager;
+import com.example.tjf.mycoolweather.HttpManager.OkHttputils;
 
 import butterknife.ButterKnife;
 /**
@@ -22,7 +27,14 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
             finish();
         }
+
+      /*  DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        TouchImageView imgView = (TouchImageView) findViewById(R.id.id_image);
+        imgView.initImageView(dm.widthPixels, dm.heightPixels - 80);*/
     }
+
 
 
 }

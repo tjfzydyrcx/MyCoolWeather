@@ -1,18 +1,18 @@
 [
     {
         "merged": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
-        "source": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\26.0.0-alpha1\\res\\layout-v21\\notification_action.xml"
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\9d4b1146d86727c051dcaef458df87101ee0c25e\\output\\res\\layout-v21\\notification_action.xml"
     },
     {
         "merged": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
-        "source": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\26.0.0-alpha1\\res\\layout-v21\\notification_template_custom_big.xml"
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\9d4b1146d86727c051dcaef458df87101ee0c25e\\output\\res\\layout-v21\\notification_template_custom_big.xml"
     },
     {
         "merged": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
-        "source": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\26.0.0-alpha1\\res\\layout-v21\\notification_action_tombstone.xml"
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\9d4b1146d86727c051dcaef458df87101ee0c25e\\output\\res\\layout-v21\\notification_action_tombstone.xml"
     },
     {
         "merged": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
-        "source": "D:\\Others\\MyCoolweather\\vitamio\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\26.0.0-alpha1\\res\\layout-v21\\notification_template_icon_group.xml"
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\9d4b1146d86727c051dcaef458df87101ee0c25e\\output\\res\\layout-v21\\notification_template_icon_group.xml"
     }
 ]
