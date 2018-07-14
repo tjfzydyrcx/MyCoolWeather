@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -73,6 +74,16 @@ public class OkHttputils implements IResquestManager {
 
     @Override
     public void upLoadFile(String url, Map<String, String> maps, Map<String, File> file, XCallBack callback) {
+        MultipartBody.Builder mBuilder = new MultipartBody .Builder();
+        for (String key : maps.keySet()) {
+            mBuilder.addFormDataPart(key, maps.get(key));
+        }
+        for (String key : file.keySet()) {
+            mBuilder.addFormDataPart(key, maps.get(key));
+        }
+        final Request request = new Request.Builder().url(url).post(mBuilder.build()).build();
+        Call call = getmInstance().mOkHttpClient.newCall(request);
+        addCallBack(call, callback);
 
     }
 

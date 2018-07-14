@@ -1,11 +1,11 @@
 package com.example.tjf.mycoolweather.db;
 
-import org.litepal.crud.DataSupport;
+import org.litepal.crud.LitePalSupport;
 
 /**
  * Created by Administrator on 2017-12-23 0023.
  */
-public class City extends DataSupport {
+public class City extends LitePalSupport {
 
     private int id;
     private int provinceId;//所属省id

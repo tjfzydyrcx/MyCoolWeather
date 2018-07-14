@@ -35,6 +35,7 @@ import com.example.tjf.mycoolweather.util.LogUtils;
 import com.example.tjf.mycoolweather.util.ToastUtil;
 import com.example.tjf.mycoolweather.util.Utility;
 
+import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
 
 import java.io.ByteArrayOutputStream;
@@ -183,7 +184,7 @@ public class WeatherActivity extends BaseActivity {
         loadBingPic();
         }*/
 
-        Picphoto ps = DataSupport.findFirst(Picphoto.class);
+        Picphoto ps = LitePal.findFirst(Picphoto.class);
         if (ps != null) {
             if (!TextUtils.isEmpty(ps.getPicName())) {
                 Glide.with(this).load(ps.getPicName()).into(bingPicImg);
@@ -306,7 +307,7 @@ public class WeatherActivity extends BaseActivity {
                     e.printStackTrace();
                 }
                 picphoto.save();
-                final Picphoto picphotos = DataSupport.findFirst(Picphoto.class);
+                final Picphoto picphotos = LitePal.findFirst(Picphoto.class);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
