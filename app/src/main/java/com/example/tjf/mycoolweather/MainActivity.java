@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.DisplayMetrics;
 
-import com.example.tjf.mycoolweather.HttpManager.HttpManagers;
-import com.example.tjf.mycoolweather.HttpManager.IResquestManager;
-import com.example.tjf.mycoolweather.HttpManager.OkHttputils;
+import com.example.tjf.mycoolweather.HttpProcessor.hpf.Http.HttpCallBack;
+import com.example.tjf.mycoolweather.HttpProcessor.hpf.Http.HttpHelper;
+import com.example.tjf.mycoolweather.HttpProcessor.hpf.processor.Okhttp3Processor;
+
+import java.util.HashMap;
 
 import butterknife.ButterKnife;
 /**
@@ -27,10 +28,20 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
             finish();
         }
+        HttpHelper.init(new Okhttp3Processor());
+        HttpHelper.obtain().get("", new HashMap<String,Object>(), new HttpCallBack<Object>() {
+            @Override
+            public void onSuccess(Object result) {
 
+            }
+
+            @Override
+            public void onFailed(String string) {
+
+            }
+        });
       /*  DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
         TouchImageView imgView = (TouchImageView) findViewById(R.id.id_image);
         imgView.initImageView(dm.widthPixels, dm.heightPixels - 80);*/
     }
