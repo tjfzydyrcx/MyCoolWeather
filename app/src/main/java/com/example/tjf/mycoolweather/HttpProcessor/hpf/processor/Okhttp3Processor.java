@@ -6,7 +6,11 @@ import com.example.tjf.mycoolweather.HttpProcessor.hpf.interfaces.ICallBack;
 import com.example.tjf.mycoolweather.HttpProcessor.hpf.interfaces.IhttpProcessor;
 
 import java.io.IOException;
+import java.security.cert.CertificateException;
 import java.util.Map;
+
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -26,7 +30,7 @@ public class Okhttp3Processor implements IhttpProcessor {
     private Handler mHandle;
 
     public Okhttp3Processor() {
-        mOkHttpClient = new OkHttpClient();
+        mOkHttpClient = getClient();
         mHandle = new Handler();
     }
 
@@ -77,7 +81,11 @@ public class Okhttp3Processor implements IhttpProcessor {
             @Override
             public void run() {
                 if (isSuccessful == true) {
-                    result[0] = response.body().toString();
+                    try {
+                        result[0] = response.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     callBack.onSuccess(result[0]);
                 } else {
                     result[0] = response.message().toString();
@@ -86,5 +94,35 @@ public class Okhttp3Processor implements IhttpProcessor {
             }
         });
 
+    }
+
+    public synchronized  OkHttpClient getClient(){
+        if (mOkHttpClient == null) {
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            try {
+                // 自定义一个信任所有证书的TrustManager，添加SSLSocketFactory的时候要用到
+                final X509TrustManager trustAllCert =
+                        new X509TrustManager() {
+                            @Override
+                            public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                            }
+
+                            @Override
+                            public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                            }
+
+                            @Override
+                            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                                return new java.security.cert.X509Certificate[]{};
+                            }
+                        };
+                final SSLSocketFactory sslSocketFactory = new SSLSocketFactoryCompat(trustAllCert);
+                builder.sslSocketFactory(sslSocketFactory, trustAllCert);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            mOkHttpClient = builder.build();
+        }
+        return mOkHttpClient;
     }
 }
