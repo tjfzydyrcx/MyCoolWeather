@@ -1,5 +1,6 @@
 package com.example.tjf.mycoolweather.HttpProcessor.hpf.processor;
 
+import android.net.Uri;
 import android.os.Handler;
 
 import com.example.tjf.mycoolweather.HttpProcessor.hpf.interfaces.ICallBack;
@@ -7,7 +8,9 @@ import com.example.tjf.mycoolweather.HttpProcessor.hpf.interfaces.IhttpProcessor
 
 import java.io.IOException;
 import java.security.cert.CertificateException;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509TrustManager;
@@ -36,6 +39,7 @@ public class Okhttp3Processor implements IhttpProcessor {
 
     @Override
     public void get(String url, Map<String, Object> params, final ICallBack callBack) {
+        url= appendParams( url,  params);
         Request request = new Request.Builder().url(url).build();
         OkCall(request, callBack);
     }
@@ -61,10 +65,28 @@ public class Okhttp3Processor implements IhttpProcessor {
             }
         });
     }
-
+    /**
+     * get方式字符中URL的拼接
+     */
+    private String appendParams(String url, Map<String, Object> params)
+    {
+        if (url == null || params == null || params.isEmpty())
+        {
+            return url;
+        }
+        Uri.Builder builder = Uri.parse(url).buildUpon();
+        Set<String> keys = params.keySet();
+        Iterator<String> iterator = keys.iterator();
+        while (iterator.hasNext())
+        {
+            String key = iterator.next();
+            builder.appendQueryParameter(key, params.get(key).toString());
+        }
+        return builder.build().toString();
+    }
     private RequestBody appendBody(Map<String, Object> params) {
         FormBody.Builder body = new FormBody.Builder();
-        if (params != null || params.isEmpty()) {
+        if (params == null || params.isEmpty()) {
             return body.build();
         }
         for (Map.Entry<String, Object> entry : params.entrySet()) {
@@ -77,18 +99,21 @@ public class Okhttp3Processor implements IhttpProcessor {
 
     private void postParams(final ICallBack callBack, final boolean isSuccessful, final Response response) {
         final String[] result = {""};
+        if (isSuccessful == true) {
+            try {
+                result[0] = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            result[0] = response.message().toString();
+        }
         mHandle.post(new Runnable() {
             @Override
             public void run() {
                 if (isSuccessful == true) {
-                    try {
-                        result[0] = response.body().string();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                     callBack.onSuccess(result[0]);
                 } else {
-                    result[0] = response.message().toString();
                     callBack.onFailed(result[0]);
                 }
             }
@@ -96,7 +121,7 @@ public class Okhttp3Processor implements IhttpProcessor {
 
     }
 
-    public synchronized  OkHttpClient getClient(){
+    public synchronized OkHttpClient getClient() {
         if (mOkHttpClient == null) {
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             try {
