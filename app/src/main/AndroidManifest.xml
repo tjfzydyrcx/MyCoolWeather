@@ -24,7 +24,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".WeatherActivity" />
         <activity android:name=".BaseActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

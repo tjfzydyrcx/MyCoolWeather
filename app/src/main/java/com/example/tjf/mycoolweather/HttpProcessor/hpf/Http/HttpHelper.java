@@ -3,6 +3,7 @@ package com.example.tjf.mycoolweather.HttpProcessor.hpf.Http;
 import com.example.tjf.mycoolweather.HttpProcessor.hpf.interfaces.ICallBack;
 import com.example.tjf.mycoolweather.HttpProcessor.hpf.interfaces.IhttpProcessor;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -13,13 +14,14 @@ public class HttpHelper implements IhttpProcessor {
 
     private static IhttpProcessor mIhttpProcessor;
     private static HttpHelper _instance;
-    private HttpHelper() {
-
+    private Map<String,Object> mParams;
+    private HttpHelper(){
+        mParams = new HashMap<>();
     }
 
     public static HttpHelper obtain() {
         if (_instance == null) {
-            synchronized (_instance) {
+            synchronized (HttpHelper.class) {
                 if (_instance == null) {
                     _instance = new HttpHelper();
                 }
