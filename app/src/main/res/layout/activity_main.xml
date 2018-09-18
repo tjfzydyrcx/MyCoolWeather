@@ -4,31 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.example.tjf.mycoolweather.MainActivity">
-    <!-- <fragment
-         android:id="@+id/choose_area_fragment"
-         android:name="com.example.tjf.mycoolweather.Fragment.Choose_AreaFragment"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent" />
 
- <com.example.tjf.mycoolweather.TouchImageView
-     android:visibility="gone"
-     android:id="@+id/id_image"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:src="@mipmap/skin_main_bg" />-->
-
-    <com.example.tjf.mycoolweather.widgets.FoldTextView
-        android:id="@+id/text_fold"
+    <fragment
+        android:id="@+id/choose_area_fragment"
+        android:name="com.example.tjf.mycoolweather.Fragment.Choose_AreaFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        android:textColor="#000"
-        app:expandText="全文"
-        app:foldText="收起全文"
-        app:showMaxLine="3"
-        app:showTipAfterExpand="true"
-        app:tipClickable="true"
-        app:tipColor="@color/colorPrimary"
-        app:tipGravity="0" />
+        android:layout_height="match_parent" />
+    <!-- <com.example.tjf.mycoolweather.TouchImageView
+    android:visibility="gone"
+    android:id="@+id/id_image"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src="@mipmap/skin_main_bg" />-->
+
+    <!-- <com.example.tjf.mycoolweather.widgets.FoldTextView
+         android:id="@+id/text_fold"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:background="#fff"
+         android:textColor="#000"
+         app:expandText="全文"
+         app:foldText="收起全文"
+         app:showMaxLine="3"
+         app:showTipAfterExpand="true"
+         app:tipClickable="true"
+         app:tipColor="@color/colorPrimary"
+         app:tipGravity="0" />-->
 </FrameLayout>

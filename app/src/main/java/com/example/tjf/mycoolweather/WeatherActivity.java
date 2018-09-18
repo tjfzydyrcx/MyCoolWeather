@@ -28,8 +28,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.tjf.mycoolweather.Mygson.Forecast;
 import com.example.tjf.mycoolweather.Mygson.Weather;
+import com.example.tjf.mycoolweather.bd_address.BDLocationUtils;
 import com.example.tjf.mycoolweather.db.Picphoto;
 import com.example.tjf.mycoolweather.service.AutoUpdateService;
+import com.example.tjf.mycoolweather.service.BeiduAddress_Service;
 import com.example.tjf.mycoolweather.util.HttpUtil;
 import com.example.tjf.mycoolweather.util.LogUtils;
 import com.example.tjf.mycoolweather.util.ToastUtil;
@@ -116,9 +118,11 @@ public class WeatherActivity extends BaseActivity {
             public void onRefresh() {
                 if (isNetChanges == true) {
                     requestWeather(mWeatherId);
-                    MyLocationManager manager = new MyLocationManager(WeatherActivity.this);
-                    manager.getaddress();
-
+                   /* MyLocationManager manager = new MyLocationManager(WeatherActivity.this);
+                    manager.getaddress();*/
+                   /* BDLocationUtils bdLocationUtils = new BDLocationUtils(WeatherActivity.this);
+                    bdLocationUtils.doLocation();//开启定位
+                    bdLocationUtils.mLocationClient.start();//开始定位*/
                 } else {
                     swipeRefresh.setRefreshing(false);
                     ToastUtil.showLong(WeatherActivity.this, "无网络连接");
@@ -239,6 +243,8 @@ public class WeatherActivity extends BaseActivity {
         if (isNetChanges) {
             Intent intent = new Intent(this, AutoUpdateService.class);
             startService(intent);
+
+
         } else {
             ToastUtil.showLong(WeatherActivity.this, "无网络连接");
         }
